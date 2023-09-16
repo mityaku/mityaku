@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="assets/quizstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz</h1>
+        <form action="quiz-results.html" method="post">
+            <div class="question">
+                <p>1. Lorem ipsum dolor sit amet.</p>
+                <input type="text" name="q1" placeholder="Your answer" required>
+            </div>
+
+            <div class="question">
+                <p>2. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi, delectus.</p>
+                <label>
+                    <input type="radio" name="q2" value="1" required>
+                    1
+                </label>
+                <label>
+                    <input type="radio" name="q2" value="2" required>
+                    2
+                </label>
+                <label>
+                    <input type="radio" name="q2" value="3" required>
+                    3
+                </label>
+            </div>
+            <div class="question">
+                <p>3. Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                <select name="q3" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const resultContainer = document.createElement("div");
+        resultContainer.className = "result-container";
+        
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const q1Answer = document.querySelector('input[name="q1"]').value;
+            const q2Answer = document.querySelector('input[name="q2"]:checked');
+            const q3Answer = document.querySelector('select[name="q3"]').value;
+
+            const answers = [];
+            if (q1Answer) {
+                answers.push(`1. Your answer: ${q1Answer}`);
+            }
+            if (q2Answer) {
+                answers.push(`2. Your answer: ${q2Answer.value}`);
+            }
+            if (q3Answer) {
+                answers.push(`3. Your answer: ${q3Answer}`);
+            }
+
+            if (answers.length > 0) {
+                const answersHTML = answers.map((answer) => `<p>${answer}</p>`).join("");
+                resultContainer.innerHTML = `
+                    <h2>Correct Answers:</h2>
+                    <p>1. Correct answer: Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                    <p>2. Correct answer: 2</p>
+                    <p>3. Correct answer: 1</p>
+                    ${answersHTML}
+                `;
+                form.parentNode.insertBefore(resultContainer, form.nextSibling); 
+            } else {
+                resultContainer.innerHTML = "";
+            }
+        });
+    });
+    </script>
+</body>
+</html>
