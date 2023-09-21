@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Times Tables</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="assets/quizstyle.css">
+</head>
+<body>
+  <h1>Times Tables Calculator</h1>
+  <form>
+
+    <div class="question">
+        <p>Times Tables to Create</p>
+        <input type="text" name="numinput" placeholder="Enter a number" required>
+    </div>
+
+    <div class="question">
+        <p>Number of rows required</p>
+        <input type="text" name="rowinput" placeholder="Enter a number" required>
+    </div>
+
+    <div>
+        <button type="submit">Generate</button>
+    </div>
+
+    </form>
+
+</body>
+<script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const number = document.querySelector('input[name="numinput"]').value;
+        const rows = document.querySelector('input[name="rowinput"]').value;
+
+        for (let i = 0; i < rows; i++) {
+            console.log(number * i)
+            var p = document.createElement('p'); 
+            p.textContent = number * i;
+            document.body.appendChild(p);
+        }
+
+        console.log("done")
+
+
+    });
+</script>
+</html>
